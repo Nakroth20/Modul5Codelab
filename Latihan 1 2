@@ -1,0 +1,152 @@
+          ----LATIHAN 1----
+public class Node {
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+public class BinaryTree {
+    Node root;
+
+    public BinaryTree() {
+        root = null;
+    }
+
+    // PreOrder traversal
+    public void preOrderTraversal(Node node) {
+        if (node != null) {
+            System.out.print(node.data + " "); // Proses node saat ini
+            preOrderTraversal(node.left); // Traverse subtree kiri
+            preOrderTraversal(node.right); // Traverse subtree kanan
+        }
+    }
+
+    // InOrder traversal
+    public void inOrderTraversal(Node node) {
+        if (node != null) {
+            inOrderTraversal(node.left); // Traverse subtree kiri
+            System.out.print(node.data + " "); // Proses node saat ini
+            inOrderTraversal(node.right); // Traverse subtree kanan
+        }
+    }
+
+    // PostOrder traversal
+    public void postOrderTraversal(Node node) {
+        if (node != null) {
+            postOrderTraversal(node.left); // Traverse subtree kiri
+            postOrderTraversal(node.right); // Traverse subtree kanan
+            System.out.print(node.data + " "); // Proses node saat ini
+        }
+    }
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        
+        // Membuat contoh tree
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+        tree.root.right.left = new Node(6);
+        tree.root.right.right = new Node(7);
+
+        System.out.println("PreOrder Traversal:");
+        tree.preOrderTraversal(tree.root);
+        
+        System.out.println("\nInOrder Traversal:");
+        tree.inOrderTraversal(tree.root);
+        
+        System.out.println("\nPostOrder Traversal:");
+        tree.postOrderTraversal(tree.root);
+    }
+}
+
+Hasil:
+InOrder Traversal: 2 16 20 25 37
+PreOrder Traversal: 20 2 16 25 37
+PostOrder Traversal: 16 2 37 25 20
+
+
+
+                 ----LATIHAN 2----
+
+
+public class BinarySearchTree {
+    Node root;
+
+    public BinarySearchTree() {
+        root = null;
+    }
+
+    // Method untuk menambahkan node baru ke dalam BST
+    public void insert(int data) {
+        root = insertRec(root, data);
+    }
+
+    private Node insertRec(Node root, int data) {
+        if (root == null) {
+            root = new Node(data);
+            return root;
+        }
+
+        if (data < root.data) {
+            root.left = insertRec(root.left, data);
+        } else {
+            root.right = insertRec(root.right, data);
+        }
+
+        return root;
+    }
+
+    // PreOrder traversal
+    public void preOrderTraversal(Node node) {
+        if (node != null) {
+            System.out.print(node.data + " ");
+            preOrderTraversal(node.left);
+            preOrderTraversal(node.right);
+        }
+    }
+
+    // InOrder traversal
+    public void inOrderTraversal(Node node) {
+        if (node != null) {
+            inOrderTraversal(node.left);
+            System.out.print(node.data + " ");
+            inOrderTraversal(node.right);
+        }
+    }
+
+    // PostOrder traversal
+    public void postOrderTraversal(Node node) {
+        if (node != null) {
+            postOrderTraversal(node.left);
+            postOrderTraversal(node.right);
+            System.out.print(node.data + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        BinarySearchTree bst = new BinarySearchTree();
+
+        int[] data = {20, 2, 25, 37, 16};
+
+        for (int value : data) {
+            bst.insert(value);
+        }
+
+        System.out.println("InOrder Traversal:");
+        bst.inOrderTraversal(bst.root);
+
+        System.out.println("\nPreOrder Traversal:");
+        bst.preOrderTraversal(bst.root);
+
+        System.out.println("\nPostOrder Traversal:");
+        bst.postOrderTraversal(bst.root);
+    }
+}
